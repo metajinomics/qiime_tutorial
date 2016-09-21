@@ -74,7 +74,7 @@ You'll see three files here: `fastqjoin.join.fastq`, `fastqjoin.un1.fastq`, and 
 head fastqjoin.join.fastq
 ```
 
-![img2](../img/fastqjoin_C01D01.png)  
+![img2](img/fastqjoin_C01D01.png)  
 
 We see that the file is still in fastq format (ie there are 4 lines for each sequence beginning with a header line). We could go through an individually count every sequence that is there, or we could make use of `grep` and `wc` to automatically count.
 
@@ -96,7 +96,7 @@ grep '@HWI' fastqjoin.join.fastq > C01D01_MergedHeaders.txt
 ```
 
 The `>` redirects the output of `grep` to a file instead of having every single result fly by on the screen. If you `head` the `C01D01_MergedHeaders.txt` file you'll see the following.
-![img3](../img/fastqjoin_C01D01_headers.png)
+![img3](img/fastqjoin_C01D01_headers.png)
 
 Then feel free to use `wc -l` on this file to check the number of lines. The `-l` command in `wc` signifies that we want to count every line instead of every word.  
 ```
@@ -162,7 +162,7 @@ Let's spend few moments getting to know the mapping file.  Navigate to the Mappi
 nano Centralia_Full_Map.txt
 ```
 **Warning** We are using the text editor `nano` to look at the mapping file because it easier to view. However, as the description implies, you can use `nano` to alter files. Just make sure you exit the program without saving any chances by pressing `ctrl+x`. If you have made changes to the fils it will ask you if you want to save them, you do not, so type `N` and `enter`.
-![img5](../img/Mapping_File_Nano.png)
+![img5](img/Mapping_File_Nano.png)
 
 A clear and comprehensive mapping file should contain all of the information that will be used in downstream analyses.  The mapping file includes both categorical (qualitative) and numeric (quantitative) contextual information about a sample. This could include, for example, information about the subject (sex, weight), the experimental treatment, time or spatial location, and all other measured variables (e.g., pH, oxygen, glucose levels). Creating a clear mapping file will provide direction as to appropriate analyses needed to test hypotheses.  Basically, all information for all anticipated analyses should be in the mapping file.
 
@@ -192,7 +192,7 @@ Inspect the new file "combined_seqs.fna."
 head combined_seqs.fna
 ```
 
-![img6](../img/Combined_Seqs_Head.png)  
+![img6](img/Combined_Seqs_Head.png)  
 
 
 Observe that QIIME has added the SampleIDs from the mapping file to the start of each sequence.  This allows QIIME to quickly link each sequence to its sampleID and metadata.
@@ -277,7 +277,7 @@ In uclust_openref/, we can see several new directories and files.  Let's explore
 
   An great overview of the steps of the open-reference process is provided by Figure 1 of Rideout et al. 2014.
 
-![img8](../img/fig-1-2x.jpg)
+![img8](img/fig-1-2x.jpg)
 
 If you navigate into one of the "step" directories, you will see a series of output files, including representative sequences of OTU clusters ("rep_set").  Take your time to explore these files using the `head` or `less` commands.  Then, navigate back to the uclust_openrefs directory.
 
@@ -322,7 +322,7 @@ nano final_otu_map.txt
 ```
 Explore this file.  It links the exact sequences in each sample to its OTU ID. You should see an OTU ID (starting with the number of the first OTU that was picked) in the the left most column.  After that number, there is a list of Sequence IDs that have been clustered into that OTU ID.  The first part of the sequence ID is the SampleID from which it came, and the second part is the sequence number within that sample.  
 
-![img7](../img/Final_OTUMAP_Nano.png)
+![img7](img/Final_OTUMAP_Nano.png)
 
 You will notice that some files have "mc2" appended to them. "mc2" designates that the minimum count of sequences for any particular OTU was 2.  In other words, that file has singleton OTUs already filtered out.  
 
