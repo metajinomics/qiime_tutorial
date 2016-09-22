@@ -50,7 +50,7 @@ more summary_otu_table_mc2_w_tax.txt
 
 The summary file contains information about the number of sequences per sample, which will help us to make decisions about rarefaction (subsampling).  When we inspect the file, we see that sample C08.05102014.R1.D01.GCTGATGAGCTG has the minimum number of reads observed.  This is what we will use as a subsampling depth.  Also, a lot of the info in this file is typically reported in methods sections of manuscripts.
 
-![img13](../img/Summary_Table.png)
+![img13](img/Summary_Table.png)
 
 
 ### 2.2 Rarefaction (subsampling)
@@ -83,7 +83,7 @@ biom summarize_table -i otu_table_mc2_w_tax_even5196.biom -o summary_otu_table_m
 
 head summary_otu_table_mc2_w_tax_even5196.txt
 ```
-![img14](../img/Rarefaction.png)
+![img14](img/Rarefaction.png)
 
 Our "clean" dataset has 54 samples and 22,496 OTUs defined at 97% sequence identity.
 
@@ -129,7 +129,7 @@ summarize_taxa_through_plots.py -o WS_aDiversity_even5196/taxa_summary5196/ -i o
 When the script is finished, navigate into the results file, and into the "taxa_summary_plots" and find the html area and bar charts.
 As you are navigating to these html files, notice that the script has produced an OTU/biom table for every taxonomic level (designated by the "L"):
 
-![image16](../img/Lineage_2.png)
+![image16](img/Lineage_2.png)
 
 The "L" stands for "lineage", and each "level" is designated by a number.  L1 is Domain, L2 is Phylum, L3 is Class, etc.  The more resolved the lineage (higher number), the less accurate the definition (e.g., L6 is not entirely and consistently the same as  "genus").
 
@@ -144,10 +144,10 @@ scp -r -i **your/key/file** ubuntu@**your_DNS**:EDAMAME_16S/uclust_openref/WS_aD
 The last command above contains the ```-r``` flag after ```scp```. The r means "recursive", and specifies that because we have a whole directory full of files, we want scp to go back and grab all of the files there, not just one. You will get an error if you try to scp a directory without the -r flag.  
 
 Now go to the desktop and double-click on area_charts.html:
-![img15](../img/Area_Chart1.png)
+![img15](img/Area_Chart1.png)
 
  and bar_charts.html:
-![img15](../img/Bar_Chart1.png)
+![img15](img/Bar_Chart1.png)
 
 
 The links above and below the charts point to the raw data or other summaries.  Spend some time exploring all of the different links.
