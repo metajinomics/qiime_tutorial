@@ -43,7 +43,7 @@ If you wish to filter your table before proceeding with summary statistics and v
 Navigate to the uclust_openref/ directory. The OTU table is the table on which all ecological analyses (e.g. diversity, patterns, etc) are performed.  Let's use biom commands to summarize the table.  Let's proceed with the table that has singletons removed and taxonomy assigned ("mc2_w_tax.biom").
 
 ```
-biom summarize_table -i otu_table_mc2_w_tax.biom -o summary_otu_table_mc2_w_tax.txt
+biom summarize-table -i otu_table_mc2_w_tax.biom -o summary_otu_table_mc2_w_tax.txt
 
 more summary_otu_table_mc2_w_tax.txt
 ```
