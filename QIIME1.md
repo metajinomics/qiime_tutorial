@@ -158,6 +158,7 @@ QIIME requires a [mapping file](http://qiime.org/documentation/file_formats.html
 Let's spend few moments getting to know the mapping file.  Navigate to the MappingFiles subdirectory in the EDAMAME_16S/MappingFiles directory.
 
 ```
+~/EDAMAME_16S/MappingFiles
 nano Centralia_Full_Map.txt
 ```
 **Warning** We are using the text editor `nano` to look at the mapping file because it easier to view. However, as the description implies, you can use `nano` to alter files. Just make sure you exit the program without saving any chances by pressing `ctrl+x`. If you have made changes to the fils it will ask you if you want to save them, you do not, so type `N` and `enter`.
