@@ -55,7 +55,7 @@ Due to a bug in this version of QIIME (v 1.9.1), this may return a warning that 
 
 There should be four new resemblance matrices in the directory.  Use nano to open them and compare their values.  
 ```
-nano binary_sorensen_dice_otu_table_mc2_w_tax_even5196.txt
+nano compar_div_even5196/binary_sorensen_dice_otu_table_mc2_w_tax_even5196.txt
 ```
 
 This should be a square matrix, and the upper and lower triangles should be mirror-images.
@@ -92,7 +92,7 @@ If we navigate into the new directory, we see there is one results file for each
 
 Inspect one of these files.
 ```
-nano pcoa_bray_curtis_otu_table_mc2_w_tax_even5196.txt
+nano compar_div_even5196_PCoA/pcoa_bray_curtis_otu_table_mc2_w_tax_even5196.txt
 ```
 
 ![img18](img/BC_Eigenvalues.png)
@@ -135,8 +135,7 @@ Navigate back to uclust_openref/ directory.
 ```
 mkdir NMDS_Plot
 nmds.py -i compar_div_even5196/bray_curtis_otu_table_mc2_w_tax_even5196.txt -o NMDS_Plot/mc2_even5196_braycurtis_NMDS_coords.txt
-cd NMDS_Plot
-head mc2_even5196_braycurtis_NMDS_coords.txt
+head NMDS_Plot/mc2_even5196_braycurtis_NMDS_coords.txt
 ```
 ![img20](img/NMDS_BC.png)
 
