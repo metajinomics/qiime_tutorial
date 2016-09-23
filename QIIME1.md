@@ -116,9 +116,8 @@ We would have to execute an iteration of the `join_paired_ends.py` command for e
 To download the script and list onto the AMI, **first navigate to the "Fastq" directory**, use `curl` to get the files, and make a new `Merged_Reads` directory to put the merged reads into.
 
 ```
+cd EDAMAME_16S/Fastq
 curl -O https://raw.githubusercontent.com/edamame-course/Amplicon_Analysis/master/resources/Merged_Reads_Script.sh
-```
-```
 curl -O https://raw.githubusercontent.com/edamame-course/Amplicon_Analysis/master/resources/list.txt
 mkdir Merged_Reads
 ```
