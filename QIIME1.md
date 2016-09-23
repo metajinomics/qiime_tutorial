@@ -293,7 +293,8 @@ If you want to build a tree with some other out-of-QIIME software, this is where
 
 How many failed alignments were there?   
 ```
-count_seqs.py -i rep_set_failures.fasta
+cd ~/EDAMAME_16S/uclust_openref
+count_seqs.py -i pynast_aligned_seqs/rep_set_failures.fasta
 ```
 
 We see that there were 690 rep. sequences that failed to align, and approximately 22,206 that did.  (Also, notice what short-read alignments generally look like...not amazing).
@@ -312,7 +313,7 @@ The failed-to-align sequences are filtered automatically with this QIIME otu-pic
 Move up a directory and then cd into the uclust_assigned_taxonomy directory.
 
 ```
-more rep_set_tax_assignments.txt
+more uclust_assigned_taxonomy/rep_set_tax_assignments.txt
 ```
 In the "taxonomy" directory, you will find a log file and the specific taxonomic assignments given to each representative sequence, linked to the OTU ID of that representative sequence
 
