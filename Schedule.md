@@ -9,7 +9,7 @@ Schedule
 | Time       | Activity        | Location  |
 | ------------- |:-------------:| :-----:|
 | 09:00      | _Parallel Tutorials:_ [QIIME Intro](https://github.com/edamame-course/2016-tutorials/blob/master/lectures/QIIMESlides.pdf), [Connect to the AWS and Tmux](https://github.com/metajinomics/qiime_tutorial/blob/master/tmux.md)  |   |
-| 10:30 | _Break_  | Tea and coffee, please   |
+| 10:30 | _Break_  |   |
 | 10:45 | _Tutorial:_ Continue amplicon analysis [QIIME1] (https://github.com/metajinomics/qiime_tutorial/blob/master/QIIME1.md) (Will and Jin)|   |
 | 12:00 | Lunch   | TBA  |
 | 13:00 | _Tutorial:_ Continue amplicon analysis [QIIME2](https://github.com/metajinomics/qiime_tutorial/blob/master/QIIME2.md) (Will and Jin) |   |
