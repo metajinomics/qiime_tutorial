@@ -8,18 +8,21 @@ date: 2016-07-13
 #Intro to QIIME for amplicon analysis
 Authored by Ashley Shade, with contributions by Sang-Hoon Lee, Siobhan Cusack, Jackson Sorensen, and John Chodkowski.   
 [EDAMAME-2016 wiki](https://github.com/edamame-course/2016-tutorials/wiki)
+This class is an adaptation of [EDAMAME-2015](https://github.com/edamame-course/2015-tutorials/tree/master/final), 
+which has from-scratch instrucitons on creating a suitable EC2 instance.
 
 ***
 EDAMAME tutorials have a CC-BY [license](https://github.com/edamame-course/2015-tutorials/blob/master/LICENSE.md). _Share, adapt, and attribute please!_
 ***
 
 ##Overarching Goal
-* This tutorial will contribute towards an understanding of **microbial amplicon analysis**
+* In tutorial we will take raw microbial amplicon sequence data through a workflow that filters, clusters, and
+infers taxonomy for each sample.  
 
 ##Learning Objectives
 * Install auxillary software on the QIIME EC2 image
 * Subsample a large amplicon dataset for workflow development and tutorial testing
-* Assemble paired-end reads
+* Overlap paired-end reads
 * Execute a shell script to automate a process
 * Explore input and output files for QIIME workflows and scripts
 * Understand the structure and components of a good mapping file
@@ -39,7 +42,7 @@ EDAMAME tutorials have a CC-BY [license](https://github.com/edamame-course/2015-
 ##1.1 Getting started
 For this tutorial, we will be using the 16S sequencing data that we previously downloaded and unzipped. Let's connect to our EC2 instance, and then wget our data.
 ```
-wget https://s3.amazonaws.com/edamame/EDAMAME_16S.tar.gz
+curl -O https://s3.amazonaws.com/edamame/EDAMAME_16S.tar.gz
 tar -zxvf EDAMAME_16S.tar.gz
 ```
 
@@ -47,12 +50,12 @@ One we've done that, we'll navigate to the directory containing those files:
 ```
 cd EDAMAME_16S/Fastq
 ```
-You should see 108 files, all ending in .fastq.
+You should see 54 pairs of files, all ending in F_sub.fastq or R_sub.fastq.
 
-## 1.2 Assembling Illumina paired-end sequences
+## 1.2 Orverlapping Illumina paired-end sequences
 These samples were sequenced using MiSeq 150 bp paired-end approach. Since the V4 region is only 253 bp our sequences should have ~50 bp of overlap. We can use this overlap to merge our 150 bp reads together to get the full 253 bp of the v4 region. Having longer reads gives us more information to work with when clustering reads into operational taxonomic units and for aligning these reads as well. The following steps go through how we accomplish this in QIIME.  
 
-### 1.2.1 Assembling paired-end reads.
+### 1.2.1 Overlapping paired-end reads.
 
 ```
 join_paired_ends.py -f C01D01F_sub.fastq -r C01D01R_sub.fastq -o C01D01
@@ -111,18 +114,24 @@ rm -r C01D01
 
 ###1.2.3  Automate paired-end merging with a shell script.
 
-We would have to execute an iteration of the `join_paired_ends.py` command for every pair of reads that need to be assembled. This could take a long time.  So, we'll use a [shell script](https://github.com/edamame-course/Amplicon_Analysis/blob/master/resources/Merged_Reads_Script.sh) to automate the task. You'll also need this [list](https://github.com/edamame-course/Amplicon_Analysis/blob/master/resources/list.txt) of file names.
+We would have to execute an iteration of the `join_paired_ends.py` command for every pair of datafiles. This could take a long time.  So, we'll use a [shell script](https://github.com/edamame-course/Amplicon_Analysis/blob/master/resources/Merged_Reads_Script.sh) to automate the task. 
+
 
 To download the script and list onto the AMI, **first navigate to the "Fastq" directory**, use `curl` to get the files, and make a new `Merged_Reads` directory to put the merged reads into.
 
 ```
-cd EDAMAME_16S/Fastq
+cd ~/EDAMAME_16S/Fastq
 curl -O https://raw.githubusercontent.com/edamame-course/Amplicon_Analysis/master/resources/Merged_Reads_Script.sh
-curl -O https://raw.githubusercontent.com/edamame-course/Amplicon_Analysis/master/resources/list.txt
 mkdir Merged_Reads
 ```
 
-Change permissions on the script to make it executable:
+This script looks for and loops through a list of file stems in `list.txt`. 
+We can generate this list from the directory listing:
+```
+ls ??????R_sub.fastq | cut -c 1-6 > list.txt
+```
+
+Now change permissions on the script to make it executable:
 ```
 chmod 755 Merged_Reads_Script.sh
 ```
@@ -136,7 +145,7 @@ _Bonus_: A little about this shell script
 For those of you interested in how this script works I recommend you take a look at it either through your terminal with `less` or online [here](https://github.com/edamame-course/Amplicon_Analysis/blob/master/resources/Merged_Reads_Script.sh). The script uses a "for loop" to repeat a set of commands for every single pair of files we have. For each sample the script first performs the merging with `join_paired_ends.py` and saves the output to a directory with the name of the sample. Secondly, because of some weird naming conventions the `join_paired_ends.py` function follows, the script renames and moves the resulting merged read files to a single directory each with their own name. Finally, the script removes the original directory that `join_paired_ends.py` as a cleanup step. This gets rid of 54 unnecessary directories making saving our instance space and our eyes the strain of having to look at them all everytime we want to `ls` in the directory.  
 ###1.2.4  Sanity check #2.
 
-How many files were we expecting from the assembly?  There were 54 pairs to be assembled, and we are generating one assembled fastq for each.  Thus, the Merged_reads directory should contain 54 files.  Navigate up one directory, and then use the `wc` (word count) command to check the number of files in the directory.
+How many files were we expecting from the overlapping step?  There were 54 pairs to be assembled, and we are generating one assembled fastq for each.  Thus, the Merged_reads directory should contain 54 files.  Navigate up one directory, and then use the `wc` (word count) command to check the number of files in the directory.
 
 ```
 ls -1 Merged_Reads | wc -l
