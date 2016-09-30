@@ -33,9 +33,7 @@ EDAMAME tutorials have a CC-BY [license](https://github.com/edamame-course/2015-
 Make sure that you are in the EDAMAME_16S/uclust_openref/ directory.  
 
 If you need the otu_table_mc2_w_tax_even5000.biom file from Parts 1 and 2 of the tutorial you can use curl to grab it from GitHub:
-```
-curl -O https://raw.githubusercontent.com/edamame-course/Amplicon_Analysis/master/resources/otu_table_mc2_w_tax_even5000.biom
-```
+
 
 We will make four kinds of resemblance matrices (sample by sample comparisons) for assessing comparative diversity.
 
